@@ -1,33 +1,33 @@
 # Campsite App
 
-これはFlutterのデモアプリです。  
-バックエンドAPIは [campsite_go](https://github.com/ttsukahara967/campsite_go) をご利用ください。
+This is a Flutter demo app.  
+You will need the backend API from [campsite_go](https://github.com/ttsukahara967/campsite_go) to run this app.
 
 ---
 
-## 一覧画面
+## List Screen
 
-![一覧画面](img/screenshot/s1.png)
-
----
-
-## 詳細画面
-
-![詳細画面](img/screenshot/s2.png)
+![List Screen](img/screenshot/s1.png)
 
 ---
 
-## セットアップ
+## Detail Screen
 
-1. このリポジトリをクローン
-2. 必要に応じて `pubspec.yaml` の `assets` 設定や依存パッケージを `flutter pub get`
-3. 画像は `img/screenshot/` 配下に入れてください
-4. [campsite_go](https://github.com/ttsukahara967/campsite_go) サーバーを起動して、Flutterアプリを実行
+![Detail Screen](img/screenshot/s2.png)
 
 ---
 
-## 補足
+## Setup
 
-- このアプリはAPI連携の動作デモ用です
-- ご自由にカスタマイズ・Forkどうぞ！
+1. Clone this repository.
+2. Make sure the image files are placed under `img/campsite/`.
+3. Run `flutter pub get` to install dependencies.
+4. Start the [campsite_go](https://github.com/ttsukahara967/campsite_go) backend server.
+5. Run the Flutter app.
 
+---
+
+## Notes
+
+- This app is a demo for API integration using Flutter.
+- Feel free to customize or fork this project!
