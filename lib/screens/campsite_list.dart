@@ -63,18 +63,15 @@ class _CampsiteListPageState extends State<CampsiteListPage> {
                 elevation: 3,
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                 child: ListTile(
-                  leading: c.imageUrl.isNotEmpty
-                      ? ClipRRect(
-                          borderRadius: BorderRadius.circular(8),
-                          child: Image.network(
-                            c.imageUrl,
-                            width: 56,
-                            height: 56,
-                            fit: BoxFit.cover,
-                            errorBuilder: (_, __, ___) => const Icon(Icons.image, size: 56),
-                          ),
-                        )
-                      : const Icon(Icons.terrain, size: 48, color: Colors.green),
+                  leading: ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: Image.asset(
+                      'img/campsite/sample.png',
+                      width: 56,
+                      height: 56,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                   title: Text(c.name, style: const TextStyle(fontWeight: FontWeight.bold)),
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,7 +82,6 @@ class _CampsiteListPageState extends State<CampsiteListPage> {
                   ),
                   trailing: const Icon(Icons.arrow_forward_ios),
                   onTap: () async {
-                    // 詳細画面へ遷移＆戻ったらrefresh
                     await Navigator.push(
                       context,
                       MaterialPageRoute(builder: (_) => CampsiteDetailPage(id: c.id)),

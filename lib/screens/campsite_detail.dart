@@ -53,18 +53,15 @@ class _CampsiteDetailPageState extends State<CampsiteDetailPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Center(
-                  child: c.imageUrl.isNotEmpty
-                      ? ClipRRect(
-                          borderRadius: BorderRadius.circular(16),
-                          child: Image.network(
-                            c.imageUrl,
-                            height: 180,
-                            width: double.infinity,
-                            fit: BoxFit.cover,
-                            errorBuilder: (_, __, ___) => const Icon(Icons.image, size: 120),
-                          ),
-                        )
-                      : const Icon(Icons.terrain, size: 120, color: Colors.green),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(16),
+                    child: Image.asset(
+                      'img/campsite/sample.png',
+                      height: 180,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
                 const SizedBox(height: 16),
                 Text(c.name, style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),

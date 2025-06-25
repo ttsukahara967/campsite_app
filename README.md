@@ -1,16 +1,33 @@
-# campsite_app
+# Campsite App
 
-A new Flutter project.
+これはFlutterのデモアプリです。  
+バックエンドAPIは [campsite_go](https://github.com/ttsukahara967/campsite_go) をご利用ください。
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 一覧画面
 
-A few resources to get you started if this is your first Flutter project:
+![一覧画面](img/screenshot/s1.png)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 詳細画面
+
+![詳細画面](img/screenshot/s2.png)
+
+---
+
+## セットアップ
+
+1. このリポジトリをクローン
+2. 必要に応じて `pubspec.yaml` の `assets` 設定や依存パッケージを `flutter pub get`
+3. 画像は `img/screenshot/` 配下に入れてください
+4. [campsite_go](https://github.com/ttsukahara967/campsite_go) サーバーを起動して、Flutterアプリを実行
+
+---
+
+## 補足
+
+- このアプリはAPI連携の動作デモ用です
+- ご自由にカスタマイズ・Forkどうぞ！
+
