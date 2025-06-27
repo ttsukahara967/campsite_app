@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart';
 import 'dart:convert';
+
 import '../api_client.dart';
 import '../models/campsite.dart';
 
@@ -47,6 +50,7 @@ class _CampsiteDetailPageState extends State<CampsiteDetailPage> {
             return const Center(child: Text('データなし'));
           }
           final c = snapshot.data!;
+
           return SingleChildScrollView(
             padding: const EdgeInsets.all(24),
             child: Column(
@@ -70,6 +74,34 @@ class _CampsiteDetailPageState extends State<CampsiteDetailPage> {
                 const SizedBox(height: 8),
                 Text('￥${c.price}', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Colors.green)),
                 const SizedBox(height: 16),
+                // 🌍 OSM MAP
+                SizedBox(
+                  height: 200,
+                  width: double.infinity,
+                  child: FlutterMap(
+                    options: MapOptions(
+                      center: LatLng(c.latitude, c.longitude),
+                      zoom: 14,
+                    ),
+                    children: [
+                      TileLayer(
+                        urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                        subdomains: ['a', 'b', 'c'],
+                      ),
+                      MarkerLayer(
+                        markers: [
+                          Marker(
+                            point: LatLng(c.latitude, c.longitude),
+                            width: 40,
+                            height: 40,
+                            child: const Icon(Icons.location_on, size: 40, color: Colors.red),
+                          ),                        
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 24),
                 Text(c.description, style: const TextStyle(fontSize: 16)),
                 const SizedBox(height: 24),
                 ElevatedButton.icon(
