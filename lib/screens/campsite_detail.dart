@@ -7,8 +7,14 @@ import '../api_client.dart';
 import '../models/campsite.dart';
 
 class CampsiteDetailPage extends StatefulWidget {
+  final ApiClientBase apiClient; // ✅ 依存を受け取る
   final int id;
-  const CampsiteDetailPage({super.key, required this.id});
+
+  const CampsiteDetailPage({
+    super.key,
+    required this.apiClient,
+    required this.id,
+  });
 
   @override
   State<CampsiteDetailPage> createState() => _CampsiteDetailPageState();
@@ -24,7 +30,7 @@ class _CampsiteDetailPageState extends State<CampsiteDetailPage> {
   }
 
   Future<Campsite> fetchCampsiteDetail() async {
-    final response = await ApiClient.get('/campsites/${widget.id}');
+    final response = await widget.apiClient.get('/campsites/${widget.id}');
     if (response.statusCode == 200) {
       return Campsite.fromJson(json.decode(response.body));
     } else {
@@ -68,11 +74,20 @@ class _CampsiteDetailPageState extends State<CampsiteDetailPage> {
                   ),
                 ),
                 const SizedBox(height: 16),
-                Text(c.name, style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
+                Text(
+                  c.name,
+                  style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                ),
                 const SizedBox(height: 8),
-                Text(c.address, style: const TextStyle(fontSize: 16, color: Colors.grey)),
+                Text(
+                  c.address,
+                  style: const TextStyle(fontSize: 16, color: Colors.grey),
+                ),
                 const SizedBox(height: 8),
-                Text('￥${c.price}', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Colors.green)),
+                Text(
+                  '￥${c.price}',
+                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Colors.green),
+                ),
                 const SizedBox(height: 16),
                 // 🌍 OSM MAP
                 SizedBox(
@@ -95,14 +110,17 @@ class _CampsiteDetailPageState extends State<CampsiteDetailPage> {
                             width: 40,
                             height: 40,
                             child: const Icon(Icons.location_on, size: 40, color: Colors.red),
-                          ),                        
+                          ),
                         ],
                       ),
                     ],
                   ),
                 ),
                 const SizedBox(height: 24),
-                Text(c.description, style: const TextStyle(fontSize: 16)),
+                Text(
+                  c.description,
+                  style: const TextStyle(fontSize: 16),
+                ),
                 const SizedBox(height: 24),
                 ElevatedButton.icon(
                   onPressed: () => Navigator.pop(context),

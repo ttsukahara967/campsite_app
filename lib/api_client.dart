@@ -1,11 +1,17 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-class ApiClient {
+abstract class ApiClientBase {
+  Future<http.Response> get(String path);
+  Future<void> login();
+}
+
+class ApiClient implements ApiClientBase {
   static String? _token;
   static const _baseUrl = 'http://localhost:8080';
 
-  static Future<void> login() async {
+  @override
+  Future<void> login() async {
     final response = await http.post(
       Uri.parse('$_baseUrl/login'),
       headers: {'Content-Type': 'application/json'},
@@ -21,7 +27,8 @@ class ApiClient {
     }
   }
 
-  static Future<http.Response> get(String path) async {
+  @override
+  Future<http.Response> get(String path) async {
     if (_token == null) {
       await login();
     }

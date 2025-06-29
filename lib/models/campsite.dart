@@ -19,13 +19,13 @@ class Campsite {
 
   factory Campsite.fromJson(Map<String, dynamic> json) {
     return Campsite(
-      id: json['id'],
-      name: json['name'],
-      address: json['address'],
-      price: json['price'],
-      description: json['description'],
-      latitude: json['latitude'].toDouble(),
-      longitude: json['longitude'].toDouble(),
+      id: json['id'] as int,
+      name: json['name'] as String,
+      address: json['address'] as String,
+      price: (json['price'] as num).toInt(),
+      description: json['description'] as String,
+      latitude: (json['latitude'] as num).toDouble(),
+      longitude: (json['longitude'] as num).toDouble(),
     );
   }
 }

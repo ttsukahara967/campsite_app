@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'dart:convert';
 import '../api_client.dart';
 import 'campsite_list.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+  final ApiClientBase apiClient;
+
+  const LoginScreen({super.key, required this.apiClient});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -20,11 +21,13 @@ class _LoginScreenState extends State<LoginScreen> {
       _error = null;
     });
     try {
-      await ApiClient.login();
+      await widget.apiClient.login(); // ← 差し替えポイント
       if (!mounted) return;
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (_) => const CampsiteListPage()),
+        MaterialPageRoute(
+          builder: (_) => CampsiteListPage(apiClient: widget.apiClient),
+        ),
       );
     } catch (e) {
       setState(() {
@@ -49,9 +52,11 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Text('Campsite App', style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
+                const Text('Campsite App',
+                    style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 24),
-                const Text('ユーザー名：admin\nパスワード：password', style: TextStyle(color: Colors.grey)),
+                const Text('ユーザー名：admin\nパスワード：password',
+                    style: TextStyle(color: Colors.grey)),
                 const SizedBox(height: 24),
                 _loading
                     ? const CircularProgressIndicator()
@@ -69,7 +74,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 if (_error != null)
                   Padding(
                     padding: const EdgeInsets.only(top: 16.0),
-                    child: Text(_error!, style: const TextStyle(color: Colors.red)),
+                    child: Text(_error!,
+                        style: const TextStyle(color: Colors.red)),
                   ),
               ],
             ),

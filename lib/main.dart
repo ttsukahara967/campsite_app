@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
+import 'api_client.dart';
 import 'screens/login_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  final apiClient = ApiClient();
+  runApp(MyApp(apiClient: apiClient));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final ApiClientBase apiClient;
+
+  const MyApp({super.key, required this.apiClient});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Campsite App',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
-        useMaterial3: true,
-      ),
-      home: const LoginScreen(),
+      home: LoginScreen(apiClient: apiClient),
     );
   }
 }
