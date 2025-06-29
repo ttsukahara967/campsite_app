@@ -15,12 +15,19 @@ class CampsiteListPage extends StatefulWidget {
 }
 
 class _CampsiteListPageState extends State<CampsiteListPage> {
-  late final Future<List<Campsite>> campsites;
+  late Future<List<Campsite>> campsites;
 
   @override
   void initState() {
     super.initState();
     campsites = fetchCampsites();
+  }
+
+  void refresh() {
+    print('[REFRESH] run');
+    setState(() {
+      campsites = fetchCampsites();
+    });
   }
 
   Future<List<Campsite>> fetchCampsites() async {
@@ -81,7 +88,6 @@ class _CampsiteListPageState extends State<CampsiteListPage> {
                 ),
                 trailing: const Icon(Icons.arrow_forward_ios),
                 onTap: () async {
-                  print('[TAP] go to detail ${c.id}');
                   await Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -91,10 +97,7 @@ class _CampsiteListPageState extends State<CampsiteListPage> {
                       ),
                     ),
                   );
-                  print('[TAP] back from detail');
-                  setState(() {
-                    // 詳細画面から戻った後にリロードしたいならここ
-                  });
+                  refresh();
                 },
               );
             },
